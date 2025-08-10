@@ -1,0 +1,5 @@
+{
+    "[go]": { "editor.codeActionsOnSave": {
+            "source.organizeImports": "never"
+        }}
+}
