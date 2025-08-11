@@ -7,8 +7,8 @@ import (
 	"time"
 )
 
-// generateHTMLReport generates an HTML report with git statistics
-func generateHTMLReport(authorStats map[string]*AuthorStats, totalCommits int) {
+// generateHTMLReportWithFile generates an HTML report with git statistics to a specified file
+func generateHTMLReportWithFile(authorStats map[string]*AuthorStats, totalCommits int, outputFile string) {
 	// Calculate global statistics
 	globalHours := make(map[int]int)
 	globalDays := make(map[time.Weekday]int)
@@ -39,8 +39,8 @@ func generateHTMLReport(authorStats map[string]*AuthorStats, totalCommits int) {
 
 	html := generateHTMLContent(authorStats, totalCommits, globalHours, globalDays, maxHourValue, maxDayValue)
 
-	// Save HTML file
-	file, err := os.Create("git_report.html")
+	// Save HTML file with custom name
+	file, err := os.Create(outputFile)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -51,7 +51,7 @@ func generateHTMLReport(authorStats map[string]*AuthorStats, totalCommits int) {
 		log.Fatal(err)
 	}
 
-	fmt.Println("HTML report generated: git_report.html")
+	fmt.Printf("HTML report generated: %s\n", outputFile)
 }
 
 // generateHTMLContent creates the complete HTML content
